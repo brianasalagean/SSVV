@@ -50,4 +50,46 @@ public class StudentServiceTest {
         // Assert
         assertEquals(1, result);
     }
+
+    @Test
+    public void testSaveStudent_emptyId() {
+        // Arrange
+        String id = "";
+        String nume = "John Doe";
+        int grupa = 123;
+
+        // Act
+        int result = service.saveStudent(id, nume, grupa);
+
+        // Assert
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveStudent_emptyName() {
+        // Arrange
+        String id = "2";
+        String nume = "";
+        int grupa = 123;
+
+        // Act
+        int result = service.saveStudent(id, nume, grupa);
+
+        // Assert
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveStudent_wrongGroup() {
+        // Arrange
+        String id = "2";
+        String nume = "John Doe";
+        int grupa = 100;
+
+        // Act
+        int result = service.saveStudent(id, nume, grupa);
+
+        // Assert
+        assertEquals(1, result);
+    }
 }
