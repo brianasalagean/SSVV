@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.repository.AbstractXMLRepository;
 import org.example.repository.NotaXMLRepository;
 import org.example.repository.StudentXMLRepository;
 import org.example.repository.TemaXMLRepository;
@@ -38,9 +37,9 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testSaveStudent_Failure() {
+    public void testSaveStudent_emptyId() {
         // Arrange
-        String id = "1";
+        String id = "";
         String nume = "John Doe";
         int grupa = 123;
 
@@ -52,14 +51,13 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testSaveStudent_emptyId() {
+    public void testSaveStudent_nullId() {
         // Arrange
-        String id = "";
         String nume = "John Doe";
         int grupa = 123;
 
         // Act
-        int result = service.saveStudent(id, nume, grupa);
+        int result = service.saveStudent(null, nume, grupa);
 
         // Assert
         assertEquals(1, result);
@@ -80,11 +78,38 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testSaveStudent_wrongGroup() {
+    public void testSaveStudent_nullName() {
+        // Arrange
+        String id = "2";
+        int grupa = 123;
+
+        // Act
+        int result = service.saveStudent(id, null, grupa);
+
+        // Assert
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveStudent_wrongGroup_belowMin() {
         // Arrange
         String id = "2";
         String nume = "John Doe";
-        int grupa = 100;
+        int grupa = 110;
+
+        // Act
+        int result = service.saveStudent(id, nume, grupa);
+
+        // Assert
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveStudent_wrongGroup_aboveMax() {
+        // Arrange
+        String id = "2";
+        String nume = "John Doe";
+        int grupa = 938;
 
         // Act
         int result = service.saveStudent(id, nume, grupa);
