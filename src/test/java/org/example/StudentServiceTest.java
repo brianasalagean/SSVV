@@ -1,5 +1,3 @@
-package org.example;
-
 import org.example.repository.NotaXMLRepository;
 import org.example.repository.StudentXMLRepository;
 import org.example.repository.TemaXMLRepository;
@@ -33,6 +31,7 @@ public class StudentServiceTest {
         int result = service.saveStudent(id, nume, grupa);
 
         // Assert
+        // TODO: change to 0; this is a bug
         assertEquals(0, result);
     }
 
