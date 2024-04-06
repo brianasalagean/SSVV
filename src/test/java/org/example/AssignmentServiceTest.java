@@ -43,4 +43,100 @@ public class AssignmentServiceTest {
 
         assertEquals(1, result);
     }
+
+    @Test
+    public void testSaveTema_emptyId() {
+        String id = "";
+        String description = "in progress";
+        int deadline = 9;
+        int start = 7;
+
+        int result = service.saveTema(id, description, deadline, start);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveTema_nullDescription() {
+        String id = "1";
+        int deadline = 9;
+        int start = 7;
+
+        int result = service.saveTema(id, null, deadline, start);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveTema_emptyDescription() {
+        String id = "1";
+        String description = "";
+        int deadline = 9;
+        int start = 7;
+
+        int result = service.saveTema(id, description, deadline, start);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveTema_deadlineOverInterval() {
+        String id = "1";
+        String description = "in progress";
+        int deadline = 15;
+        int start = 7;
+
+        int result = service.saveTema(id, description, deadline, start);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveTema_deadlineUnderInterval() {
+        String id = "1";
+        String description = "in progress";
+        int deadline = 0;
+        int start = 7;
+
+        int result = service.saveTema(id, description, deadline, start);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveTema_startOverInterval() {
+        String id = "1";
+        String description = "in progress";
+        int deadline = 9;
+        int start = 15;
+
+        int result = service.saveTema(id, description, deadline, start);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveTema_startUnderInterval() {
+        String id = "1";
+        String description = "in progress";
+        int deadline = 9;
+        int start = 0;
+
+        int result = service.saveTema(id, description, deadline, start);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void testSaveTema_startGreaterThanDeadline() {
+        String id = "1";
+        String description = "in progress";
+        int deadline = 7;
+        int start = 9;
+
+        int result = service.saveTema(id, description, deadline, start);
+
+        assertEquals(1, result);
+    }
+
 }
